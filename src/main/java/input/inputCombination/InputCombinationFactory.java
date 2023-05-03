@@ -1,0 +1,52 @@
+package input.inputCombination;
+
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import input.InputHandler;
+
+import static java.lang.Math.min;
+
+public class InputCombinationFactory {
+
+    private final InputHandler inputHandler;
+
+    public InputCombinationFactory(InputHandler inputHandler) {
+        this.inputHandler = inputHandler;
+    }
+
+    public InputCombination makeComplexInputCombination(List<ActionType> actionTypes, List<InputEvent> inputEvents) {
+        Set<InputElement> inputElements = new HashSet<>();
+        for (int i = 0; i < min(actionTypes.size(), inputEvents.size()); i++) {
+            InputElement inputElement = new InputElement(actionTypes.get(i), inputEvents.get(i));
+            inputElements.add(inputElement);
+        }
+        return new ComplexInputCombination(this.inputHandler, inputElements);
+    }
+
+    public InputCombination makeSimpleInputCombination(ActionType actionType, InputEvent inputEvent) {
+        InputElement inputElement = new InputElement(actionType, inputEvent);
+        return new SimpleInputCombination(this.inputHandler, inputElement);
+    }
+
+    public InputCombination makeLmbCombination() {
+        InputEvent inputEvent = InputElement.getMouseInputEventByKeycode(MouseEvent.BUTTON1);
+        InputElement inputElement = new InputElement(ActionType.DOWN, inputEvent);
+        return new SimpleInputCombination(this.inputHandler, inputElement);
+    }
+
+    public InputCombination makeEscapeCombination() {
+        InputEvent inputEvent = InputElement.getKeyboardInputEventByKeycode(KeyEvent.VK_ESCAPE);
+        InputElement inputElement = new InputElement(ActionType.DOWN, inputEvent);
+        return new SimpleInputCombination(this.inputHandler, inputElement);
+    }
+
+    public InputCombination makeNullCombination() {
+        return new SimpleInputCombination(this.inputHandler, null);
+    }
+
+}

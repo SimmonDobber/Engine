@@ -1,0 +1,40 @@
+package input.inputCombination;
+
+import java.awt.Button;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import lombok.Getter;
+
+public class InputElement {
+
+    @Getter
+    private final ActionType actionType;
+    @Getter
+    private final InputEvent inputEvent;
+
+    public InputElement(ActionType actionType, InputEvent inputEvent) {
+        this.actionType = actionType;
+        this.inputEvent = inputEvent;
+    }
+
+    public int getKeyCode() {
+        if (this.inputEvent instanceof MouseEvent) {
+            return ((MouseEvent) this.inputEvent).getButton();
+        }
+        if (this.inputEvent instanceof KeyEvent) {
+            return ((KeyEvent) this.inputEvent).getKeyCode();
+        }
+        return 0;
+    }
+
+    public static InputEvent getMouseInputEventByKeycode(int keyCode) {
+        return new MouseEvent(new Button(), 0, 0, 0, 0, 0, 0, false, keyCode);
+    }
+
+    public static InputEvent getKeyboardInputEventByKeycode(int keyCode) {
+        return new KeyEvent(new Button(), 0, 0, 0, keyCode, '0', 0);
+    }
+
+}
