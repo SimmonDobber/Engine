@@ -9,7 +9,7 @@ import input.inputCombination.InputCombination;
 
 public interface Scene extends Observer {
 
-    void updateAndDraw();
+    void update();
 
     void addObjectLowerThan(Visual inserted, Visual contained);
 

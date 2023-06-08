@@ -24,7 +24,6 @@ public class ComplexButton implements Visual, Interactive {
         }
     }
 
-
     @Override
     public void update() {
         for (InputCombination inputCombination : this.actions.keySet()) {

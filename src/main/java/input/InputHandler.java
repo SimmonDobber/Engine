@@ -96,7 +96,7 @@ public class InputHandler implements common.Observable, InputObservable {
     @Override
     public void notifyObservers() {
         for (Observer observer : this.observers) {
-            observer.updateAndDraw();
+            observer.update();
         }
     }
 

@@ -40,7 +40,7 @@ public class SceneBean implements Scene {
 	}
 
 	@Override
-	public void updateAndDraw() {
+	public void update() {
 		if (this.currentObjectCollection != null) {
 			updateTopObjectHoverMark();
 			updateGloballyActivatedObjects();

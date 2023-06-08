@@ -23,9 +23,4 @@ public class SimpleButton extends ComplexButton {
             this.actions.get(activationCombination).execute();
         }
     }
-
-    @Override
-    public Drawable getDrawable() {
-        return this.drawable;
-    }
 }
